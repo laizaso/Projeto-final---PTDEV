@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: ptdev
+      POSTGRES_DB: dbptdev
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./banco-de-dados-ptdev:/var/lib/postgres/data
+
+volumes:
+  -banco-de-dados-ptdev:

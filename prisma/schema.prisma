@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique //email tem que ser unico
+  password String
+  role     Role   @default(USER) //tipos de usuários
+
+  reservations Reservation[] //lista de reservas de um usuário, que pode reservar varias salas
+}
+
+enum Role { //papel de usuário, vai ajudar no controle de permissões, permitindo a adms funcionalidades extras
+  USER
+  ADMIN
+}
+
+model Room {
+  id          String @id @default(uuid())
+  name        String //nome da sala
+  capacity    Int //capacidade máxima em numero de pessoas
+  description String //descriçao da sala
+  isActive    Boolean @default(true) //indica se a sala está ativa, que por padrão é "sim"
+
+  reservations Reservation[] //lista de reservas da sala, que pode ter varias reservas
+}
+
+model Reservation {
+  id        String   @id @default(uuid()) //id da reserva
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  roomId    String
+  room      Room     @relation(fields: [roomId], references: [id])
+  startTime DateTime //Data e hora de início da reserva.
+  endTime   DateTime //Data e hora de término da reserva.
+  createdAt DateTime @default(now()) //Data e hora em que a reserva foi criada
+}
