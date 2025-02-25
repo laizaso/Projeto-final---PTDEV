@@ -1,3 +1,12 @@
+<!--Iremos separar o projeto em módulos(agrupamentos que se assemelham):
+
+auth → Login, registro e JWT.
+users → Gestão de usuários.
+rooms → CRUD de salas.
+reservations → CRUD de reservas.
+
+
+
 <!--## **Rotas da API**
 
 ### **Autenticação**
