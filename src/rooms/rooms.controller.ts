@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Put, Patch, Delete } from '@nestjs/common';
 import { Role } from '@prisma/client';
-import { CreateRoomDto, UpdateRoomDto } from 'src/dto/rooms.dtos';
+import { CreateRoomDto, UpdateRoomDto } from 'src/rooms/dto/rooms.dtos';
 import { Roles } from 'src/roles';
 import { RoomsService } from 'src/rooms/rooms.service';
 

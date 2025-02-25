@@ -1,7 +1,9 @@
+/* eslint-disable prettier/prettier */
 //importei a biblioteca class-validator
 import { IsBoolean, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
 // o dto vai definir os tipos de dados
-export class CreateRoomDto { //tipo de dados da sala
+export class CreateRoomDto {
+  //tipo de dados da sala
   @IsString() //so aceita string
   @IsNotEmpty() //nao pode ser vazio
   name: string;
@@ -15,7 +17,8 @@ export class CreateRoomDto { //tipo de dados da sala
   description: string;
 }
 
-export class UpdateRoomDto { //tipo de dados para atualizar a sala
+export class UpdateRoomDto {
+  //tipo de dados para atualizar a sala
   @IsString()
   @IsNotEmpty()
   name?: string;
