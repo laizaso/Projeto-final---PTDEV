@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/database/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtconstants } from './constants';
 
@@ -10,7 +10,7 @@ import { jwtconstants } from './constants';
     JwtModule.register({
       global: true,
       secret: jwtconstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '72h' },
     }),
   ],
   controllers: [AuthController],

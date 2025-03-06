@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post} from '@nestjs/common';
+import { Body, Controller, Post, Req, Request, UseGuards} from '@nestjs/common';
 import { LoginDTO, RegisterDTO } from './dtos/auth';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 
 @Controller('auth')
@@ -22,6 +23,28 @@ export class AuthController {
     
 
     return this.authService.login(body);
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    return await this.authService.forgotPassword(email);
+  }
+
+  @Post('reset-password')
+  async resetPassword(@Body() body) {
+    return await this.authService.resetPassword(body.token, body.newPassword);
+  }
+
+  @Post('logout')
+  @UseGuards(AuthGuard)
+  async logout(@Req() req){
+    const token = req.headers.authorization?.split(' ')[1]
+
+    if(!token){
+      return {message: 'Usuário não autenticado'}
+    }
+
+    return this.authService.logout(token)
   }
 
   

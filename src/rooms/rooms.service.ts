@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../database/prisma.service';
 import { CreateRoomDto, UpdateRoomDto } from 'src/rooms/dto/rooms.dtos';
 
 //CreatRoomDto define os dados necessarios para criar uma sala

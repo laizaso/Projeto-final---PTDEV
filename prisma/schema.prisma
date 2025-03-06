@@ -20,7 +20,17 @@ model User {
   password String
   role     Role   @default(USER) //tipos de usuários
 
+//Campos para recuperação de senha
+  resetPasswordToken   String?  
+  resetPasswordExpires DateTime?
+
   reservations Reservation[] //lista de reservas de um usuário, que pode reservar varias salas
+}
+
+model TokenBlacklist {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  createdAt DateTime @default(now())
 }
 
 enum Role { //papel de usuário, vai ajudar no controle de permissões, permitindo a adms funcionalidades extras
