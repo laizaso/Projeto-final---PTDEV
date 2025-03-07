@@ -1,5 +1,5 @@
 import { Injectable, ForbiddenException, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../database/prisma.service';
 import { ReservationHistoryDTO } from './dto/reservation-history.dto';
 import { differenceInHours } from 'date-fns';
 
