@@ -7,9 +7,9 @@ services:
       POSTGRES_PASSWORD: ptdev
       POSTGRES_DB: dbptdev
     ports:
-      "5432:5432"
+      - "5432:5432"  
     volumes:
-      banco-de-dados-ptdev:/var/lib/postgresql/data
+      - banco-de-dados-ptdev:/var/lib/postgresql/data  
 
 volumes:
-  -banco-de-dados-ptdev:
+  banco-de-dados-ptdev:  
