@@ -6,6 +6,7 @@ import { RoomsModule } from './rooms/rooms.module';
 import { ReservationsModule } from './reservations/reservations.module';
 
 @Module({
+
   imports: [UsersModule, AuthModule, RoomsModule, ReservationsModule],
   controllers: [],
   providers: [PrismaService],
