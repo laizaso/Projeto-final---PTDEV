@@ -111,6 +111,7 @@ export class ReservationsService {
   }
 
   async deleteReservation(admin: User, id: string) {
+    console.log(admin.role)
     if (admin.role !== 'ADMIN') {
       throw new ForbiddenException('Apenas administradores podem remover reservas');
     }

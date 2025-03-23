@@ -3,6 +3,7 @@ import { Body, Controller, Post, Req, Request, UseGuards} from '@nestjs/common';
 import { LoginDTO, RegisterDTO } from './dtos/auth';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 
 @Controller('auth')
@@ -24,12 +25,12 @@ export class AuthController {
 
     return this.authService.login(body);
   }
-
+  @ApiBearerAuth()
   @Post('forgot-password')
   async forgotPassword(@Body('email') email: string) {
     return await this.authService.forgotPassword(email);
   }
-
+  @ApiBearerAuth()
   @Post('reset-password')
   async resetPassword(@Body() body) {
     return await this.authService.resetPassword(body.token, body.newPassword);

@@ -1,10 +1,12 @@
 import { Controller, Get, Post, Body, Param, Put, Patch, Delete, UseGuards } from '@nestjs/common';
-import { Role } from '@prisma/client';
-import { CreateRoomDto, UpdateRoomDto } from 'src/rooms/dto/rooms.dtos';
-import { RoomsService } from 'src/rooms/rooms.service';
-import { GetUser } from 'src/auth/get-user.decorator';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { CreateRoomDto, UpdateRoomDto } from '../rooms/dto/rooms.dtos';
+import { RoomsService } from '../rooms/rooms.service';
+import { GetUser } from '../auth/get-user.decorator';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+
+@ApiBearerAuth()
 @Controller('rooms')
 @UseGuards(AuthGuard)  // todas as rotas com /rooms
 export class RoomsController {
@@ -13,8 +15,8 @@ export class RoomsController {
   @Post()  //cria sala
   
   create(@Body() createRoomDto: CreateRoomDto, @GetUser() user) {
-    console.log("Usuário autenticado:", user)
-    return this.roomsService.create(createRoomDto,user );
+    console.log(user)
+    return this.roomsService.create(user, createRoomDto );
   }
 
   @Get() //lista as salas

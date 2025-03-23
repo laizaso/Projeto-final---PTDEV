@@ -5,7 +5,8 @@ import * as crypto from 'crypto';
 import {JwtService} from '@nestjs/jwt'
 
 import { LoginDTO, RegisterDTO } from './dtos/auth';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../database/prisma.service';
+import { Role } from '@prisma/client';
 
 
 //o injectable diz para o nest que a class é um provider. então no module temos que passar como provider
@@ -25,16 +26,18 @@ export class AuthService {
     }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
+   // const userRole = data.role ?? Role.USER;
 
-    const user = await this.prismaService.user.create({data:{
+    const user = await this.prismaService.user.create({data:{ 
         ...data,
-        password: hashedPassword,
+        password: hashedPassword//, role: userRole,
     }});
 
     return {
         id:user.id,
         email:user.email,
         name: user.name,
+      //  role: user.role
 
     };
   }
@@ -62,6 +65,7 @@ export class AuthService {
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
       })
 
     return {accessToken};

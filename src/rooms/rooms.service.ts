@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-import { CreateRoomDto, UpdateRoomDto } from 'src/rooms/dto/rooms.dtos';
+import { CreateRoomDto, UpdateRoomDto } from '../rooms/dto/rooms.dtos';
 import { User } from '@prisma/client';
 
 //CreatRoomDto define os dados necessarios para criar uma sala
@@ -9,9 +9,11 @@ import { User } from '@prisma/client';
 export class RoomsService {
   constructor(private prisma: PrismaService) {} // a propriedade prisma recebe o PrismaService permitindo a interação com o banco de dados
 
-  async create(data: CreateRoomDto, user: User) {
+  async create(user: User,data: CreateRoomDto) {
+    console.log(user)
     if (user.role !== 'ADMIN') {
-      throw new ForbiddenException ('somente admin pode criar uma sala uma sala')
+
+      throw new ForbiddenException ('somente admin pode criar uma sala')
     }
     //cria a sala
     return this.prisma.room.create({ data }); //retorna os dados da sala
@@ -51,8 +53,8 @@ export class RoomsService {
     });
   }
 
-  async remove(id: string , user:User ) {
-    if (user.role !== 'ADMIN') {
+  async remove(id: string , admin:User ) {
+    if (admin.role !== 'ADMIN') {
       throw new ForbiddenException ('somente admin pode deletar uma sala uma sala')
     }
     //remove as salas

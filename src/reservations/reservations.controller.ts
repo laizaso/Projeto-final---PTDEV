@@ -3,7 +3,10 @@ import { ReservationsService } from './reservations.service';
 import { ReservationHistoryDTO } from './dto/reservation-history.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { GetUser } from '../auth/get-user.decorator'; 
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+
+@ApiBearerAuth()
 @Controller('reservations')
 @UseGuards(AuthGuard) 
 export class ReservationsController {
@@ -12,6 +15,7 @@ export class ReservationsController {
   //criar uma nova reserva
   @Post()
   async create(@GetUser() user, @Body() dto: ReservationHistoryDTO) {
+    console.log(user.role)
     return this.reservationsService.createReservation(user, dto);
   }
 
