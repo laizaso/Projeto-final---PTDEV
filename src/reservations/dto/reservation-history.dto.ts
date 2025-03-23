@@ -1,7 +1,6 @@
 
 
 export class ReservationHistoryDTO {
-  id: string;
 
   roomId: string;
 
