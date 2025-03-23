@@ -2,10 +2,9 @@ import { ApiProperty } from "@nestjs/swagger";
 
 
 export class ReservationHistoryDTO {
+
   @ApiProperty()
-  id: string;
-  @ApiProperty()
-  roomId: string;
+ roomId: string;
   @ApiProperty()
   startTime: Date;
   @ApiProperty()

@@ -3,12 +3,13 @@ import { ReservationsService } from './reservations.service';
 import { ReservationHistoryDTO } from './dto/reservation-history.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { GetUser } from '../auth/get-user.decorator'; 
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 
 @ApiBearerAuth()
 @Controller('reservations')
 @UseGuards(AuthGuard) 
+@ApiTags()
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
